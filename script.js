@@ -69,22 +69,41 @@
   });
 
   cw3.addEventListener("click", function () {
-    answer.innerHTML = "Pobieranie z PAW";
-
-    fetch("https://6af0d9af11a6aa866e7fcb5f.mockapi.io/PAW")
+    fetch("./plik.json")
       .then((response) => response.json())
-      .then((users) => {
-        let html = "<h3>Lista:</h3><ul>";
-        users.forEach((user) => {
-          html += `<li><strong>${user.name}</strong> (ID: ${user.id})</li>`;
+      .then((data) => {
+        console.log("Pobrane dane", data);
+
+        let html = "<h3>Posty i komentarze</h3>";
+
+        data.posts.forEach((post) => {
+          const comments = data.comments
+            ? data.comments.filter((c) => c.postId === post.id)
+            : [];
+
+          html += `
+          <div style="border: 1px solid #ccc; margin-bottom: 10px; padding: 10px; text-align: left;">
+            <h4 style="margin: 0; color: #007bff;">[ID: ${post.id}] ${post.title}</h4>
+            <p>${post.body}</p>
+            <h5>Komentarze:</h5>
+            <ul>
+        `;
+
+          if (comments.length > 0) {
+            comments.forEach((comment) => {
+              html += `<li>${comment.body}</li>`;
+            });
+          } else {
+            html += `<li><em>Brak</em></li>`;
+          }
+
+          html += `
+            </ul>
+          </div>
+        `;
         });
-        html += "</ul>";
 
         answer.innerHTML = html;
-      })
-      .catch((error) => {
-        answer.innerHTML = "Blad";
-        console.error(error);
       });
   });
 })();

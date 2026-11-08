@@ -1,0 +1,26 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "Jeden",
+      "body": "Jeden Jeden"
+    },
+    {
+      "id": 2,
+      "title": "Dwa Dwa",
+      "body": "Dwa Dwa Dwa Dwa"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "Jeden",
+      "postId": 1
+    },
+    {
+      "id": 2,
+      "body": "Dwa Dwa",
+      "postId": 1
+    }
+  ]
+}
