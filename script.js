@@ -69,6 +69,22 @@
   });
 
   cw3.addEventListener("click", function () {
-    //TODO
+    answer.innerHTML = "Pobieranie z PAW";
+
+    fetch("https://6af0d9af11a6aa866e7fcb5f.mockapi.io/PAW")
+      .then((response) => response.json())
+      .then((users) => {
+        let html = "<h3>Lista:</h3><ul>";
+        users.forEach((user) => {
+          html += `<li><strong>${user.name}</strong> (ID: ${user.id})</li>`;
+        });
+        html += "</ul>";
+
+        answer.innerHTML = html;
+      })
+      .catch((error) => {
+        answer.innerHTML = "Blad";
+        console.error(error);
+      });
   });
 })();
